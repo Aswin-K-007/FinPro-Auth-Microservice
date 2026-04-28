@@ -1,6 +1,9 @@
 package com.finpro.auth_service.service;
 
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.finpro.auth_service.dto.UserDetails;
 import com.finpro.auth_service.entity.User;
@@ -8,6 +11,7 @@ import com.finpro.auth_service.entity.UserProfile;
 import com.finpro.auth_service.repository.UserProfileRepository;
 import com.finpro.auth_service.repository.UserRepository;
 
+@Service
 public class UserProfileService {
 	private final UserProfileRepository userProfileRepo ;
 	private final UserRepository userRepo;
@@ -17,9 +21,8 @@ public class UserProfileService {
 		this.userRepo = userRepo;
 	}
 
-	public UserDetails getUserProfile(Long userId) {
-		userProfileRepo.findByUser_Id(userId);
-		return null;
+	public Optional<UserProfile> getUserProfile(Long userId) {
+		return userProfileRepo.findByUser_Id(userId);
 	}
 
 	public ResponseEntity<?> createUserProfile(UserDetails userDetails) {

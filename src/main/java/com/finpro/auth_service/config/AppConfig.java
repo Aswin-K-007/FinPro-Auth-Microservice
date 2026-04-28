@@ -11,7 +11,6 @@ public class AppConfig {
 
     @Bean
     public RestTemplate restTemplate() {
-    	System.out.println("AppConfig:RestTemplate");
         return new RestTemplate();
     }
     
