@@ -34,12 +34,13 @@ public class JwtUtility {
      * Generates a JWT token containing the username as subject 
      * and a custom "role" claim for the Gateway to read.
      */
-    public String generateToken(String username,String role) {
+    public String generateToken(String username,String role, Long userId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
 
         return Jwts.builder()
                 .setSubject(username)
+                .claim("userId", userId)
                 .claim("role", role)                  // "sub" claim
                 .setIssuedAt(now)                     // "iat" claim
                 .setExpiration(expiryDate)            // "exp" claim
