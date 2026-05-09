@@ -9,11 +9,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterUserRequest {
+	
+	@NotBlank
+    @Size(min = 4, max = 50)
+	private String firstName;
 
     @NotBlank
-    @Size(min = 6, max = 50)
-    private String username;
+    @Size(min = 4, max = 50)
+    private String lastName;
 
+    private Long mobileNo;
+    
     @Email
     @NotBlank
     private String email;

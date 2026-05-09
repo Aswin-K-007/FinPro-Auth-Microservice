@@ -1,6 +1,10 @@
 package com.finpro.auth_service.controller;
 
 import jakarta.validation.Valid;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import com.finpro.auth_service.dto.LoginRequest;
 import com.finpro.auth_service.dto.LoginResponse;
 import com.finpro.auth_service.dto.RegisterUserRequest;
-import com.finpro.auth_service.entity.User;
 import com.finpro.auth_service.service.AuthService;
 import com.finpro.auth_service.service.UserService;
 
@@ -25,11 +28,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(
+    public ResponseEntity<?> register(
             @Valid @RequestBody RegisterUserRequest request) {
 
-        User user = userService.register(request);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    	System.out.println(request.getEmail());
+    	String username = userService.register(request);
+    	Map<String, String> response = new HashMap<>();
+        response.put("message", "User registered successfully");
+        response.put("username", username);
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
     
     @PostMapping("/login")

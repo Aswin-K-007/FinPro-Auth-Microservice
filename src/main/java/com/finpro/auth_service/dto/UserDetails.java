@@ -13,6 +13,8 @@ public class UserDetails {
 	private Long userId;
 	private String firstName;
     private String lastName;
+    private String email;
+    private Long mobileNo;
     private String address;
     private String city;
     private String country;
